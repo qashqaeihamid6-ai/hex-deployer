@@ -50,153 +50,179 @@ const PAGE = `<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Press+Start+2P&family=Nunito:wght@400;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --mc-grass:#5DAE3B; --mc-grass-hi:#8FD45E; --mc-grass-hi2:#A6E27A;
-  --mc-grass-lo:#3B7A23; --mc-grass-mid:#4E9A30;
-  --mc-ink:#1E3A14; --mc-paper:#FFFFFF; --mc-tint:#F1F8EC; --mc-tint2:#E3F2D8;
-  --mc-line:#D6E6CC; --mc-splash:#FFE600;
-  --mc-font-pixel:'Pixelify Sans','Vazirmatn',system-ui,sans-serif;
-  --mc-font-title:'Press Start 2P','Pixelify Sans','Vazirmatn',monospace;
-  --mc-font-body:'Nunito','Vazirmatn',system-ui,sans-serif;
-  --mc-bevel:inset 3px 3px 0 var(--mc-grass-hi), inset -3px -3px 0 var(--mc-grass-lo);
-  --mc-slot:inset 3px 3px 0 #C9DCBD, inset -3px -3px 0 #FFFFFF;
-  --mc-drop:6px 6px 0 rgba(30,58,20,.16);
-  --mc-drip:
+  --g1:#5DAE3B; --g2:#6CC24A; --g3:#8FD45E; --g4:#A6E27A; --gd:#3B7A23; --ink:#1E3A14;
+  --paper:#FFFFFF; --tint:#F4F9F0; --tint2:#E7F3DE; --line:#D8E8CE; --muted:#5F7F50; --splash:#FFE600;
+  --font-pixel:'Pixelify Sans','Vazirmatn',system-ui,sans-serif;
+  --font-title:'Press Start 2P','Pixelify Sans','Vazirmatn',monospace;
+  --font-body:'Nunito','Vazirmatn',system-ui,sans-serif;
+  --r:14px;
+  --sh-sm:0 1px 2px rgba(30,58,20,.06), 0 2px 8px rgba(30,58,20,.05);
+  --sh-md:0 2px 6px rgba(30,58,20,.07), 0 12px 28px -12px rgba(30,58,20,.22);
+  --sh-lg:0 4px 12px rgba(30,58,20,.08), 0 24px 48px -20px rgba(30,58,20,.28);
+  --drip:
     linear-gradient(90deg,#8FD45E 0 8px,#5DAE3B 8px 16px,#79CF55 16px 24px,#6CC24A 24px 32px,#5DAE3B 32px 40px,#8FD45E 40px 48px,#4E9A30 48px 56px,#6CC24A 56px 64px) 0 0 / 64px 10px repeat-x,
-    linear-gradient(90deg,#5DAE3B 0 8px,transparent 8px 16px,#4E9A30 16px 24px,#5DAE3B 24px 32px,transparent 32px 48px,#3B7A23 48px 56px,transparent 56px 64px) 0 10px / 64px 4px repeat-x,
-    linear-gradient(90deg,transparent 0 16px,#3B7A23 16px 24px,transparent 24px 48px,#4E9A30 48px 56px,transparent 56px 64px) 0 14px / 64px 4px repeat-x;
+    linear-gradient(90deg,#5DAE3B 0 8px,transparent 8px 16px,#4E9A30 16px 24px,#5DAE3B 24px 32px,transparent 32px 48px,#3B7A23 48px 56px,transparent 56px 64px) 0 10px / 64px 4px repeat-x;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
-  background-color:#FFFFFF;
-  background-image:
-    linear-gradient(rgba(93,174,59,.07) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(93,174,59,.07) 2px, transparent 2px);
-  background-size:32px 32px;
+  background:
+    linear-gradient(180deg,#FFFFFF 0%,#F7FBF3 45%,#FFFFFF 100%),
+    linear-gradient(rgba(93,174,59,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(93,174,59,.05) 1px,transparent 1px);
+  background-size:100% 100%, 28px 28px, 28px 28px;
   background-attachment:fixed;
-  color:var(--mc-ink);
-  font-family:var(--mc-font-body);
-  min-height:100vh; line-height:1.75; font-size:14.5px;
+  color:var(--ink); font-family:var(--font-body); min-height:100vh; line-height:1.8; font-size:14.5px;
+  -webkit-font-smoothing:antialiased;
 }
 body::before{
-  display:block; content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='520' shape-rendering='crispEdges'%3E%3Cg fill='%23E6F3DC'%3E%3Crect x='80' y='70' width='192' height='24'/%3E%3Crect x='120' y='46' width='112' height='24'/%3E%3Crect x='600' y='190' width='256' height='32'/%3E%3Crect x='656' y='158' width='144' height='32'/%3E%3Crect x='1060' y='40' width='144' height='16'/%3E%3Crect x='1092' y='24' width='80' height='16'/%3E%3Crect x='300' y='400' width='176' height='24'/%3E%3Crect x='340' y='376' width='96' height='24'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 1400px 520px repeat;
-  animation:mcClouds 140s linear infinite;
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(760px 380px at 88% -8%, rgba(143,212,94,.20), transparent 65%),
+    radial-gradient(620px 320px at 4% 12%, rgba(108,194,74,.14), transparent 60%);
 }
-@keyframes mcClouds{from{background-position:0 0}to{background-position:-1400px 0}}
-body::after{
-  display:block; content:""; position:fixed; inset:auto 0 0 0; height:26px; z-index:0; pointer-events:none;
-  background:var(--mc-drip); border-top:3px solid var(--mc-ink);
-}
-.wrap{max-width:820px;margin:0 auto;padding:26px 16px 90px;position:relative;z-index:1}
+.wrap{max-width:830px;margin:0 auto;padding:34px 18px 90px;position:relative;z-index:1}
 
-header{text-align:center;margin:10px 0 26px;position:relative}
-.mascot-icon{width:74px;height:74px;image-rendering:pixelated;animation:mcBob 2.4s ease-in-out infinite;
-  filter:drop-shadow(0 6px 0 rgba(30,58,20,.14))}
-@keyframes mcBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.brand{font-family:var(--mc-font-title);font-size:20px;line-height:1.6;color:var(--mc-grass-hi);
-  letter-spacing:1px;text-shadow:0 2px 0 var(--mc-grass),0 4px 0 var(--mc-ink);margin:6px 0 0}
-.brand b{color:var(--mc-splash);text-shadow:0 2px 0 var(--mc-ink)}
-.splash{position:absolute;top:6px;left:4px;color:var(--mc-splash);font-family:var(--mc-font-pixel);
-  font-weight:700;font-size:14px;transform:rotate(-13deg);text-shadow:2px 2px 0 var(--mc-ink);z-index:2}
-h1{font-family:var(--mc-font-pixel);font-weight:700;font-size:21px;color:var(--mc-ink);margin:20px 0 4px}
-.sub{color:#5B7A4C;font-size:13.5px;margin:0}
+/* ---------- هدر ---------- */
+header{text-align:center;margin:8px 0 30px;position:relative;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.crest{display:inline-grid;place-items:center;width:86px;height:86px;border-radius:22px;
+  background:linear-gradient(145deg,var(--g3),var(--g1));
+  box-shadow:0 10px 24px -8px rgba(59,122,35,.55), inset 0 -4px 0 rgba(0,0,0,.10), inset 0 3px 0 rgba(255,255,255,.35);
+  margin-bottom:14px}
+.mascot-icon{width:46px;height:46px;image-rendering:pixelated;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.brand{font-family:var(--font-title);font-size:18px;letter-spacing:1px;line-height:1.6;margin-top:4px}
+.brand .b1{color:var(--gd);text-shadow:3px 3px 0 rgba(30,58,20,.16)}
+.brand .b2{color:var(--splash);
+  text-shadow:2px 0 0 var(--ink),-2px 0 0 var(--ink),0 2px 0 var(--ink),0 -2px 0 var(--ink),4px 4px 0 rgba(30,58,20,.22)}
+h1{font-family:var(--font-pixel);font-weight:700;font-size:23px;color:var(--ink);margin:12px 0 0;letter-spacing:.2px}
+.splash{position:absolute;top:10px;left:4px;color:var(--gd);background:var(--splash);
+  font-family:var(--font-pixel);font-weight:700;font-size:12.5px;padding:3px 10px;border-radius:999px;
+  transform:rotate(-11deg);box-shadow:0 4px 10px -4px rgba(30,58,20,.4);z-index:2;
+  border:2px solid var(--ink)}
+.drip-line{height:14px;margin:14px auto 0;width:250px;background:var(--drip)}
 
-.card{background:#FFFFFF;border:3px solid var(--mc-ink);box-shadow:var(--mc-drop);
-  padding:26px 20px 20px;margin-bottom:22px;position:relative}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:14px;
-  background:var(--mc-drip);border-bottom:3px solid var(--mc-ink)}
-.card h2{font-family:var(--mc-font-pixel);font-weight:700;font-size:16.5px;margin:0 0 4px;
-  display:flex;align-items:center;gap:10px;color:var(--mc-ink)}
-.card h2 .num{width:26px;height:26px;flex:none;display:grid;place-items:center;font-size:13px;
-  background:var(--mc-grass);color:#fff;border:2px solid var(--mc-ink);
-  box-shadow:var(--mc-bevel);font-family:var(--mc-font-pixel);font-weight:700}
-.desc{color:#5B7A4C;font-size:13px;margin:0 0 16px;padding-right:36px}
+/* ---------- کارت‌ها ---------- */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-md);
+  padding:24px 22px;margin-bottom:20px;position:relative;overflow:hidden;
+  animation:fadeUp .5s ease both}
+.card:nth-of-type(1){animation-delay:.05s}.card:nth-of-type(2){animation-delay:.1s}
+.card:nth-of-type(3){animation-delay:.15s}.card:nth-of-type(4){animation-delay:.2s}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--g4),var(--g1) 45%,var(--gd));}
+.card h2{font-family:var(--font-pixel);font-weight:700;font-size:16.5px;margin:0 0 14px;
+  display:flex;align-items:center;gap:10px;color:var(--ink)}
+.num{width:27px;height:27px;flex:none;display:grid;place-items:center;font-size:13px;color:#fff;
+  border-radius:9px;background:linear-gradient(145deg,var(--g2),var(--gd));
+  box-shadow:0 3px 8px -2px rgba(59,122,35,.6);font-family:var(--font-pixel);font-weight:700}
 
-label{display:block;font-family:var(--mc-font-pixel);font-weight:600;font-size:13.5px;color:var(--mc-ink);margin:0 0 6px}
+label{display:block;font-family:var(--font-pixel);font-weight:600;font-size:13.5px;color:var(--ink);margin:0 0 7px}
 input[type=text],input[type=password],select{
-  width:100%;background:#FFFFFF;color:var(--mc-ink);border:2px solid var(--mc-ink);border-radius:0;
-  box-shadow:var(--mc-slot);padding:10px 12px;font-family:var(--mc-font-body);font-size:14px;outline:none}
-input:focus,select:focus{box-shadow:var(--mc-slot),0 0 0 3px var(--mc-grass-hi)}
-input[readonly]{color:#3F5C33}
-select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mc-ink) 50%),linear-gradient(135deg,var(--mc-ink) 50%,transparent 50%);
-  background-position:calc(14px) calc(50% - 2px),calc(8px) calc(50% - 2px);
-  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-left:30px}
-.row{display:flex;gap:8px;align-items:stretch}
+  width:100%;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:11px;
+  padding:11px 13px;font-family:var(--font-body);font-size:14px;outline:none;
+  transition:border-color .15s, box-shadow .15s; box-shadow:var(--sh-sm)}
+input:focus,select:focus{border-color:var(--g2);box-shadow:0 0 0 4px rgba(108,194,74,.18)}
+input[readonly]{color:#4A6B3C;background:var(--tint)}
+select{appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233B7A23' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 14px center;padding-left:34px;cursor:pointer}
+.row{display:flex;gap:9px;align-items:stretch}
 .row>*{min-width:0}
 .grow{flex:1}
 
-.btn{border:3px solid var(--mc-ink);border-radius:0;font-family:var(--mc-font-pixel);font-weight:600;font-size:15px;
-  padding:10px 18px;background:#FFFFFF;color:var(--mc-ink);box-shadow:0 4px 0 var(--mc-ink);
-  cursor:pointer;position:relative;transition:none;white-space:nowrap;text-decoration:none;display:inline-block}
-.btn:hover{background:var(--mc-tint2)}
-.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--mc-ink)}
+/* ---------- دکمه‌ها ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  font-family:var(--font-pixel);font-weight:600;font-size:15px;color:var(--ink);background:#fff;
+  border:1.5px solid var(--line);border-radius:11px;padding:11px 18px;cursor:pointer;
+  box-shadow:var(--sh-sm);transition:transform .12s, box-shadow .15s, background .15s;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--tint);box-shadow:var(--sh-md)}
+.btn:active{transform:translateY(2px)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.btn-primary{background:var(--mc-grass);color:#FFFFFF;text-shadow:2px 2px 0 rgba(30,58,20,.6);box-shadow:var(--mc-bevel),0 4px 0 var(--mc-ink)}
-.btn-primary:hover{background:#6CC24A;color:#FFFFA0}
-.btn-danger{background:#FFFFFF;color:#A1271B;border-color:#A1271B;box-shadow:0 4px 0 #A1271B}
-.btn-danger:hover{background:#FDE8E6}
-.btn-sm{padding:6px 12px;font-size:13px}
-.btn-icon{flex:none;width:46px;padding:0;display:grid;place-items:center;font-size:17px}
+.btn-primary{background:linear-gradient(145deg,var(--g2),var(--gd));color:#fff;border-color:transparent;
+  box-shadow:0 3px 0 var(--gd), 0 10px 22px -10px rgba(59,122,35,.8);text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.btn-primary:hover{background:linear-gradient(145deg,var(--g3),var(--g1));box-shadow:0 3px 0 var(--gd),0 14px 26px -10px rgba(59,122,35,.9)}
+.btn-primary:active{box-shadow:0 1px 0 var(--gd)}
+.btn-danger{color:#A1271B;border-color:#F0C9C5;background:#fff}
+.btn-danger:hover{background:#FDEDEB}
+.btn-sm{padding:7px 13px;font-size:13px;border-radius:9px}
+.btn-icon{flex:none;width:47px;padding:0;font-size:17px}
 
-.tokenbox{background:var(--mc-tint);border:2px dashed var(--mc-line);padding:14px;margin-bottom:14px}
-.tokenbox .lead{font-family:var(--mc-font-pixel);font-weight:700;font-size:15px;color:var(--mc-ink);margin-bottom:10px}
-.tokenbox .lead span{color:var(--mc-grass-lo)}
-.rawurl{display:flex;gap:8px;align-items:center;margin-top:10px;background:#fff;border:2px solid var(--mc-ink);padding:6px 8px;direction:ltr}
-.rawurl input{border:none;box-shadow:none;font-family:'Nunito',monospace;font-size:11.5px;color:#3F5C33;flex:1;padding:2px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.chip{font-family:var(--mc-font-pixel);font-weight:600;font-size:11.5px;color:#2F661B;background:#E3F4D8;
-  border:2px solid currentColor;padding:2px 9px;box-shadow:inset -2px -2px 0 rgba(30,58,20,.12)}
+/* ---------- باکس توکن ---------- */
+.tokenbox{background:linear-gradient(180deg,var(--tint),#fff);border:1.5px dashed var(--line);
+  border-radius:12px;padding:16px;margin-bottom:16px}
+.tokenbox .lead{font-family:var(--font-pixel);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:11px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.chip{font-family:var(--font-pixel);font-weight:600;font-size:11.5px;color:var(--gd);
+  background:var(--tint2);border:1px solid #CFE6C2;border-radius:999px;padding:3px 11px}
+.rawurl{display:flex;gap:8px;align-items:center;margin-top:11px;background:#fff;
+  border:1.5px solid var(--line);border-radius:10px;padding:5px 8px;direction:ltr}
+.rawurl input{border:none;box-shadow:none;font-family:'Nunito',monospace;font-size:11.5px;color:#4A6B3C;flex:1;padding:2px;background:transparent}
 
-.note{font-size:13px;color:#2F4F22;background:var(--mc-tint);border:2px solid var(--mc-line);padding:9px 12px;margin-top:12px}
-.note.warn{background:#FFF4CC;border-color:#E3C34A;color:#7A5A00}
-.note.ok{background:#E3F4D8;border-color:var(--mc-grass);color:#2F661B}
+.note{font-size:13px;color:#33512A;background:var(--tint);border:1px solid var(--line);
+  border-radius:11px;padding:10px 13px;margin-top:14px}
+.note.warn{background:#FFF8E1;border-color:#EFD98A;color:#7A5A00}
+.note.ok{background:#EAF6E1;border-color:#BFE0AC;color:#2F661B}
 
-.xp{height:18px;border:2px solid var(--mc-ink);background:#E9E9E9;box-shadow:var(--mc-slot);margin-bottom:16px;overflow:hidden}
-.xp i{display:block;height:100%;width:0;background:linear-gradient(180deg,#A6E27A 0%,#5DAE3B 100%);transition:width .35s steps(8)}
-.xplabel{font-family:var(--mc-font-pixel);font-weight:600;font-size:12.5px;color:var(--mc-ink);margin-bottom:5px;display:flex;justify-content:space-between}
+/* ---------- نوار پیشرفت ---------- */
+.xpbar{height:12px;background:#EAF0E4;border-radius:999px;overflow:hidden;margin-bottom:18px;box-shadow:inset 0 1px 2px rgba(30,58,20,.10)}
+.xpbar i{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--g4),var(--g1) 60%,var(--gd));
+  background-size:200% 100%;transition:width .4s ease;animation:shine 2.4s linear infinite}
+@keyframes shine{from{background-position:0 0}to{background-position:200% 0}}
+.xplabel{font-family:var(--font-pixel);font-weight:600;font-size:12.5px;color:var(--muted);
+  margin-bottom:7px;display:flex;justify-content:space-between}
 
-.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
-.steps li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#5B7A4C;background:var(--mc-tint);
-  border:2px solid var(--mc-line);padding:9px 12px}
-.steps li .ic{width:22px;height:22px;flex:none;display:grid;place-items:center;font-size:12px;font-weight:700;
-  background:#fff;border:2px solid var(--mc-ink);box-shadow:var(--mc-slot);font-family:var(--mc-font-pixel)}
-.steps li.run{background:#fff;border-color:var(--mc-grass);color:var(--mc-ink)}
-.steps li.run .ic{background:var(--mc-splash);color:var(--mc-ink)}
-.steps li.done{background:#fff;color:var(--mc-ink)}
-.steps li.done .ic{background:var(--mc-grass);color:#fff;border-color:var(--mc-ink)}
-.steps li.err{border-color:#A1271B;background:#FDE8E6;color:#A1271B}
-.steps li.err .ic{background:#A1271B;color:#fff}
-.spinner{display:inline-block;width:11px;height:11px;border:2px solid rgba(30,58,20,.3);border-top-color:var(--mc-ink);
+/* ---------- مراحل ---------- */
+.steps{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.steps li{display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--muted);
+  background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:10px 13px;transition:.2s}
+.steps li .ic{width:23px;height:23px;flex:none;display:grid;place-items:center;font-size:12px;font-weight:700;
+  border-radius:50%;background:var(--tint);border:1.5px solid var(--line);color:var(--muted);font-family:var(--font-pixel)}
+.steps li.run{border-color:var(--g2);background:#fff;color:var(--ink);box-shadow:0 0 0 4px rgba(108,194,74,.10)}
+.steps li.run .ic{background:var(--splash);border-color:#E6CF00;color:var(--ink)}
+.steps li.done{border-color:#CFE6C2;background:#FAFEF7;color:var(--ink)}
+.steps li.done .ic{background:var(--g1);border-color:var(--gd);color:#fff}
+.steps li.err{border-color:#E9B4AE;background:#FDF2F0;color:#A1271B}
+.steps li.err .ic{background:#C0392B;border-color:#A1271B;color:#fff}
+.spinner{display:inline-block;width:11px;height:11px;border:2px solid rgba(30,58,20,.25);border-top-color:var(--gd);
   border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.log{margin-top:16px;background:#12210C;border:3px solid var(--mc-ink);padding:11px 13px;
+/* ---------- کنسول ---------- */
+.log{margin-top:16px;background:linear-gradient(180deg,#16290E,#0F1D09);border-radius:12px;padding:12px 14px;
   font-family:'Nunito',ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;
-  max-height:220px;overflow:auto;direction:ltr;text-align:left;color:#A6E27A;display:none;white-space:pre-wrap;
-  box-shadow:var(--mc-slot)}
+  max-height:220px;overflow:auto;direction:ltr;text-align:left;color:#B9E79A;display:none;white-space:pre-wrap;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
 .log.on{display:block}
-.log .ok{color:#8FD45E}.log .err{color:#FF8A8A}.log .warn{color:#FFE600}.log .muted{color:#6E8F5C}
+.log .ok{color:#9CE86B}.log .err{color:#FF9E9E}.log .warn{color:#FFE066}.log .muted{color:#7C9B6B}
 
+/* ---------- نتیجه ---------- */
 .result{display:none}
-.result.on{display:block}
-.advancement{background:#E3F4D8;border:3px solid var(--mc-ink);box-shadow:var(--mc-drop);padding:12px 16px;margin-bottom:16px;
-  font-family:var(--mc-font-pixel);font-weight:700;font-size:16px;color:var(--mc-grass-lo);display:flex;gap:10px;align-items:center}
-.advancement small{display:block;font-family:var(--mc-font-body);font-weight:600;font-size:13px;color:#2F4F22}
-.urlbox{display:flex;gap:8px;align-items:center;background:var(--mc-tint);border:2px dashed var(--mc-ink);padding:12px;margin:12px 0;direction:ltr}
-.urlbox input{background:transparent;border:none;box-shadow:none;font-family:'Nunito',monospace;font-size:13.5px;color:#2F661B;flex:1;padding:0}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin-top:12px}
-.kv .k{color:#5B7A4C;font-family:var(--mc-font-pixel);font-weight:600}
-.kv .v{direction:ltr;text-align:right;word-break:break-all;color:#2F4F22}
+.result.on{display:block;animation:fadeUp .45s ease both}
+.trophy{display:flex;gap:13px;align-items:center;background:linear-gradient(135deg,#EAF6E1,#FFF);
+  border:1.5px solid #CFE6C2;border-radius:13px;padding:14px 16px;margin-bottom:16px}
+.trophy .emblem{width:44px;height:44px;flex:none;display:grid;place-items:center;font-size:22px;border-radius:12px;
+  background:linear-gradient(145deg,var(--g3),var(--g1));box-shadow:0 6px 14px -6px rgba(59,122,35,.7)}
+.trophy b{font-family:var(--font-pixel);font-weight:700;font-size:16px;color:var(--gd);display:block}
+.trophy small{font-family:var(--font-body);font-size:13px;color:#3C5C31}
+.urlbox{display:flex;gap:9px;align-items:center;background:var(--tint);border:1.5px dashed var(--g2);
+  border-radius:12px;padding:12px;margin:12px 0;direction:ltr}
+.urlbox input{background:transparent;border:none;box-shadow:none;font-family:'Nunito',monospace;
+  font-size:13.5px;color:var(--gd);flex:1;padding:0}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:13px;margin-top:14px}
+.kv .k{color:var(--muted);font-family:var(--font-pixel);font-weight:600}
+.kv .v{direction:ltr;text-align:right;word-break:break-all;color:#33512A}
 .warnbox{font-size:12.5px;color:#A1271B}
-code{background:var(--mc-tint);border:1px solid var(--mc-line);padding:1px 6px;font-size:12px;direction:ltr;display:inline-block}
+code{background:var(--tint);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:12px;direction:ltr;display:inline-block}
 
-details{margin-top:18px;border-top:2px dashed var(--mc-line);padding-top:14px}
-summary{cursor:pointer;font-family:var(--mc-font-pixel);font-weight:600;font-size:14px;color:var(--mc-grass-lo);outline:none}
-details .body{font-size:13px;color:#2F4F22;margin-top:10px}
+details{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+summary{cursor:pointer;font-family:var(--font-pixel);font-weight:600;font-size:14px;color:var(--gd);outline:none}
+details .body{font-size:13px;color:#33512A;margin-top:10px}
 .hidden{display:none!important}
-footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-height:2}
-@media(max-width:560px){.row{flex-wrap:wrap}.wrap{padding:18px 12px 80px}.splash{display:none}}
+footer{text-align:center;color:#87A07A;font-size:12px;margin-top:32px;line-height:2}
+@media(max-width:560px){.row{flex-wrap:wrap}.wrap{padding:22px 12px 80px}.splash{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -204,36 +230,29 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
 
   <header>
     <div class="splash" id="splash">Now with D1!</div>
-    <svg class="mascot-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" aria-hidden="true">
-      <path d="M8 1L15 4.5L8 8L1 4.5Z" fill="#8FD45E"/>
-      <path d="M1 4.5L8 8V15L1 11.5Z" fill="#4E9A30"/>
-      <path d="M8 8L15 4.5V11.5L8 15Z" fill="#3B7A23"/>
-      <path d="M1 4.5L8 8L15 4.5V6.5L8 10L1 6.5Z" fill="#6CC24A" opacity=".9"/>
-      <rect x="6" y="3" width="1" height="1" fill="#A6E27A"/><rect x="9" y="4" width="1" height="1" fill="#A6E27A"/>
-      <rect x="4" y="4" width="1" height="1" fill="#5DAE3B"/><rect x="11" y="4" width="1" height="1" fill="#5DAE3B"/>
-      <rect x="8" y="2" width="1" height="1" fill="#5DAE3B"/>
-      <rect x="3" y="8" width="1" height="2" fill="#3B7A23"/><rect x="5" y="10" width="1" height="2" fill="#3B7A23"/>
-      <rect x="11" y="9" width="1" height="2" fill="#2F661B"/><rect x="13" y="8" width="1" height="1" fill="#2F661B"/>
-      <path d="M8 1L15 4.5V11.5L8 15L1 11.5V4.5Z M1 4.5L8 8L15 4.5 M8 8V15" fill="none" stroke="#1E3A14" stroke-width=".7"/>
-    </svg>
-    <div class="brand">HEX<b>Panel</b></div>
-    <h1>دیپلوی خودکار پنل HEX</h1>
-    <p class="sub">این صفحه خودش روی یک Worker اجرا می‌شود — نه Pages لازم دارد، نه گیت‌هاب</p>
+    <div class="crest">
+      <svg class="mascot-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" aria-hidden="true">
+        <path d="M8 1L15 4.5L8 8L1 4.5Z" fill="#C6F0A8"/>
+        <path d="M1 4.5L8 8V15L1 11.5Z" fill="#4E9A30"/>
+        <path d="M8 8L15 4.5V11.5L8 15Z" fill="#3B7A23"/>
+      </svg>
+    </div>
+    <div class="brand"><span class="b1">HEX</span>&nbsp;<span class="b2">PANEL</span></div>
+    <h1>دیپلوی خودکار پنل</h1>
+    <div class="drip-line" aria-hidden="true"></div>
   </header>
 
-  <div id="netWarn"></div>
-
+  <!-- قدم ۱ -->
   <section class="card">
     <h2><span class="num">1</span> توکن API کلودفلر</h2>
-    <p class="desc">توکن فقط در حافظهٔ همین صفحه و در Worker خودتان استفاده می‌شود و ذخیره نمی‌گردد.</p>
 
     <div class="tokenbox">
-      <div class="lead">🔑 برای ساخت API روی این لینک کلیک کنید <span>↓</span></div>
-      <a id="tokenLink" class="btn btn-primary" target="_blank" rel="noopener">ساخت API Token در کلودفلر ↗</a>
+      <div class="lead">🔑 برای ساخت API روی این لینک کلیک کنید</div>
+      <a id="tokenLink" class="btn btn-primary" target="_blank" rel="noopener">ساخت API Token ↗</a>
       <div class="chips">
         <span class="chip">Workers Scripts — Edit</span>
         <span class="chip">D1 — Edit</span>
-        <span class="chip">Workers KV Storage — Edit</span>
+        <span class="chip">Workers KV — Edit</span>
         <span class="chip">Account Settings — Read</span>
       </div>
       <div class="rawurl">
@@ -242,13 +261,11 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
       </div>
     </div>
 
-    <div>
-      <label for="apiToken">توکن API را اینجا بچسبانید</label>
-      <div class="row">
-        <input id="apiToken" class="grow" type="password" placeholder="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" autocomplete="off" spellcheck="false" />
-        <button id="togglePass" class="btn btn-icon" type="button" title="نمایش/پنهان">👁</button>
-        <button id="verifyBtn" class="btn btn-primary" type="button">بررسی و ادامه</button>
-      </div>
+    <label for="apiToken">توکن API را اینجا بچسبانید</label>
+    <div class="row">
+      <input id="apiToken" class="grow" type="password" placeholder="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" autocomplete="off" spellcheck="false" />
+      <button id="togglePass" class="btn btn-icon" type="button" title="نمایش/پنهان">👁</button>
+      <button id="verifyBtn" class="btn btn-primary" type="button">بررسی و ادامه</button>
     </div>
 
     <div id="accountWrap" class="hidden" style="margin-top:14px">
@@ -258,14 +275,14 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     <div id="tokenMsg"></div>
   </section>
 
+  <!-- قدم ۲ -->
   <section class="card">
     <h2><span class="num">2</span> نام ورکر و پایگاه داده</h2>
-    <p class="desc">نام‌ها به‌طور خودکار و تصادفی ساخته می‌شوند؛ می‌توانید تغییرشان دهید.</p>
 
-    <div style="margin-bottom:12px">
-      <label for="workerName">نام ورکر (Script name)</label>
+    <div style="margin-bottom:14px">
+      <label for="workerName">نام ورکر</label>
       <div class="row">
-        <input id="workerName" class="grow" type="text" spellcheck="false" />
+        <input id="workerName" class="grow" type="text" spellcheck="false" dir="ltr" />
         <button id="randWorker" class="btn btn-icon" type="button" title="نام تصادفی جدید">🎲</button>
       </div>
     </div>
@@ -273,29 +290,24 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     <div>
       <label for="d1Name">نام پایگاه داده D1</label>
       <div class="row">
-        <input id="d1Name" class="grow" type="text" spellcheck="false" />
+        <input id="d1Name" class="grow" type="text" spellcheck="false" dir="ltr" />
         <button id="randD1" class="btn btn-icon" type="button" title="نام تصادفی جدید">🎲</button>
       </div>
     </div>
-
-    <div class="note">
-      اگر پایگاه داده‌ای با همین نام وجود داشته باشد، <b>همان استفاده می‌شود</b> و داده‌های قبلی حفظ می‌گردد.
-      پنل روی <b>Worker</b> با آدرس <code>*.workers.dev</code> ساخته می‌شود (نه Pages).
-    </div>
   </section>
 
+  <!-- قدم ۳ -->
   <section class="card">
     <h2><span class="num">3</span> دیپلوی</h2>
-    <p class="desc">کد پنل درون همین Worker است؛ مراحل پشت‌سرهم اجرا می‌شوند (۳۰ تا ۶۰ ثانیه).</p>
 
-    <div class="xplabel"><span>پیشرفت دیپلوی</span><span id="xpText">۰ از ۷</span></div>
-    <div class="xp"><i id="xpFill"></i></div>
+    <div class="xplabel"><span>پیشرفت</span><span id="xpText">۰ از ۷</span></div>
+    <div class="xpbar"><i id="xpFill"></i></div>
 
     <button id="deployBtn" class="btn btn-primary" type="button" style="width:100%;padding:13px">🚀 شروع دیپلوی</button>
 
     <ul class="steps" id="steps">
-      <li data-step="code"><span class="ic">•</span><span>آماده‌سازی کد ورکر پنل</span></li>
-      <li data-step="d1"><span class="ic">•</span><span>ساخت / اتصال پایگاه داده D1</span></li>
+      <li data-step="code"><span class="ic">•</span><span>آماده‌سازی کد پنل</span></li>
+      <li data-step="d1"><span class="ic">•</span><span>ساخت پایگاه داده D1</span></li>
       <li data-step="sub"><span class="ic">•</span><span>بررسی زیردامنه workers.dev</span></li>
       <li data-step="upload"><span class="ic">•</span><span>آپلود ورکر و باندینگ D1</span></li>
       <li data-step="enable"><span class="ic">•</span><span>فعال‌سازی آدرس عمومی</span></li>
@@ -306,15 +318,13 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     <div class="log" id="log"></div>
   </section>
 
+  <!-- نتیجه -->
   <section class="card result" id="resultCard">
-    <h2><span class="num">✓</span> پنل شما آماده است</h2>
-    <p class="desc">در اولین مراجعه، رمز عبور مدیر را در صفحه Setup بسازید.</p>
+    <h2><span class="num">✓</span> پنل آماده است</h2>
 
-    <div class="advancement">
-      <span>🏆</span>
-      <span>دیپلوی کامل شد!
-        <small>پنل HEX روی Cloudflare Workers مستقر گردید</small>
-      </span>
+    <div class="trophy">
+      <span class="emblem">🏆</span>
+      <span><b>دیپلوی کامل شد!</b><small>پنل روی Cloudflare Workers مستقر گردید</small></span>
     </div>
 
     <div class="urlbox">
@@ -323,8 +333,8 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     </div>
 
     <div class="row" style="margin-bottom:6px">
-      <a id="openSetup" class="btn btn-primary" style="flex:1;text-align:center" target="_blank" rel="noopener">باز کردن صفحه Setup</a>
-      <a id="openPanel" class="btn" style="flex:1;text-align:center" target="_blank" rel="noopener">باز کردن پنل</a>
+      <a id="openSetup" class="btn btn-primary" style="flex:1" target="_blank" rel="noopener">صفحه Setup</a>
+      <a id="openPanel" class="btn" style="flex:1" target="_blank" rel="noopener">باز کردن پنل</a>
     </div>
 
     <div class="kv">
@@ -333,8 +343,7 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
       <span class="k">پایگاه داده</span><span class="v" id="rD1">—</span>
       <span class="k">شناسه D1</span><span class="v" id="rD1Id">—</span>
       <span class="k">باندینگ</span><span class="v">D1 ✓ · nodejs_compat ✓</span>
-      <span class="k">نوع استقرار</span><span class="v">Cloudflare Worker (workers.dev)</span>
-      <span class="k">وضعیت سلامت</span><span class="v" id="rHealth">—</span>
+      <span class="k">سلامت</span><span class="v" id="rHealth">—</span>
     </div>
 
     <div class="note ok" id="d1ProbeNote">پایگاه داده پاسخ داد.</div>
@@ -352,10 +361,7 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     </details>
   </section>
 
-  <footer>
-    <div>همین صفحه یک Worker است — کد پنل درون آن است و مستقیماً به کلودفلر آپلود می‌شود.</div>
-    <div>HEX Panel · v5.3.0 · Minecraft Grass</div>
-  </footer>
+  <footer>HEX Panel · v5.3.0</footer>
 </div>
 
 <script>
@@ -372,20 +378,24 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
   var state = { token: "", accountId: "", sub: "", worker: "", d1: "", d1Id: "", url: "" };
   var STEP_IDS = ["code", "d1", "sub", "upload", "enable", "health", "probe"];
 
-  function rand(n) {
-    var a = new Uint8Array(n), s = "";
-    crypto.getRandomValues(a);
-    for (var i = 0; i < n; i++) s += a[i].toString(16).padStart(2, "0");
-    return s.slice(0, n);
-  }
+  /* ---------- نام‌های تصادفی ---------- */
+  var ADJ = ["smart","edge","quiet","bright","swift","noble","vivid","solar","lunar","crisp",
+             "rapid","brave","calm","neon","ultra","prime","core","deep","wild","iron","nova","lucid"];
+  var NOUN = ["shield","pixel","orbit","comet","river","canyon","falcon","cipher","beacon","vector",
+              "prism","quantum","ridge","harbor","lantern","meadow","summit","tunnel","vertex","anchor"];
+  var DB = ["data","db","store","vault","node","base","cache","index","cube","bank"];
+
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function num3() { return String(100 + Math.floor(Math.random() * 900)); }
+  function nameWorker() { return pick(ADJ) + "-" + pick(NOUN) + "-" + num3(); }
+  function nameD1() { return pick(DB) + "-" + num3(); }
+
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function nameWorker() { return "hex-panel-" + rand(6); }
-  function nameD1() { return "hex-kv-" + rand(6) + "-d1"; }
 
   var logBox = el("log");
   function log(msg, kind) {
@@ -421,8 +431,7 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
 
   var CORS_HINT = "ارتباط با سرور برقرار نشد (Failed to fetch). " +
     "اگر این صفحه روی یک Worker اجرا نمی‌شود (فایل محلی / هاست استاتیک)، مرورگر به‌دلیل محدودیت CORS " +
-    "نمی‌تواند با api.cloudflare.com تماس بگیرد؛ در این حالت هر توکنی همین خطا را می‌دهد. " +
-    "راه‌حل: فایل hex-deployer.worker.js را به‌صورت Worker دیپلوی کنید.";
+    "نمی‌تواند با api.cloudflare.com تماس بگیرد. راه‌حل: فایل hex-deployer.worker.js را به‌صورت Worker دیپلوی کنید.";
 
   async function api(path, body) {
     var res;
@@ -437,13 +446,11 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     }
     var data = null;
     try { data = await res.json(); } catch (e) { data = null; }
-    if (!res.ok || !data || !data.ok) {
-      throw new Error((data && data.error) || ("HTTP " + res.status));
-    }
+    if (!res.ok || !data || !data.ok) throw new Error((data && data.error) || ("HTTP " + res.status));
     return data;
   }
 
-  /* ---------- قدم ۱ ---------- */
+  /* ---------- مقداردهی ---------- */
   el("tokenLink").href = TOKEN_URL;
   el("rawUrl").value = TOKEN_URL;
   el("workerName").value = nameWorker();
@@ -484,7 +491,7 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
       el("accountWrap").classList.remove("hidden");
       sel.onchange = function () { state.accountId = sel.value; };
       msg.innerHTML = '<div class="note ok" style="margin-top:12px">✓ توکن معتبر است — ' +
-        d.accounts.length + ' اکانت پیدا شد. حالا از قدم ۲ نام‌ها را تأیید و دیپلوی را شروع کنید.</div>';
+        d.accounts.length + ' اکانت پیدا شد. حالا نام‌ها را تأیید و دیپلوی را شروع کنید.</div>';
       log("توکن تأیید شد. اکانت: " + d.accounts[0].name, "ok");
     } catch (err) {
       msg.innerHTML = '<div class="note warn" style="margin-top:12px">' + esc(err.message) + "</div>";
@@ -495,7 +502,7 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     }
   };
 
-  /* ---------- قدم ۳ ---------- */
+  /* ---------- دیپلوی ---------- */
   el("deployBtn").onclick = async function () {
     if (!state.token) { log("ابتدا توکن را در قدم ۱ تأیید کنید.", "err"); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
     var wName = el("workerName").value.trim();
@@ -509,10 +516,8 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     STEP_IDS.slice(0, 5).forEach(function (s) { step(s, "run"); });
 
     try {
-      log("در حال اجرای مراحل سمت سرور…");
-      var d = await api("/api/deploy", {
-        token: state.token, accountId: state.accountId, workerName: wName, d1Name: dName,
-      });
+      log("در حال اجرای مراحل روی سرویس…");
+      var d = await api("/api/deploy", { token: state.token, accountId: state.accountId, workerName: wName, d1Name: dName });
       STEP_IDS.slice(0, 5).forEach(function (s) { step(s, "done"); });
       log("کد پنل: " + Math.round(d.size / 1024) + " کیلوبایت", "muted");
       log("پایگاه داده: " + d.d1 + (d.d1Reused ? " (استفاده از موجود)" : " (جدید)"), "ok");
@@ -522,7 +527,6 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
 
       state.worker = d.worker; state.d1 = d.d1; state.d1Id = d.d1Id; state.url = d.url; state.sub = d.sub;
 
-      /* بررسی سلامت */
       step("health", "run");
       log("در انتظار آماده شدن " + d.url + " …");
       var live = null;
@@ -536,7 +540,6 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
       log("سلامت تأیید شد: HEX v" + live.version + " — " + live.status, "ok");
       step("health", "done");
 
-      /* بررسی D1 */
       step("probe", "run");
       var hasTable = false;
       try {
@@ -546,7 +549,6 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
       } catch (e) { log("کوئری تست D1 ناموفق: " + e.message, "warn"); }
       step("probe", "done");
 
-      /* نتیجه */
       el("panelUrl").value = d.url;
       el("openSetup").href = d.url + "/panel/setup";
       el("openPanel").href = d.url + "/panel/login";
@@ -597,33 +599,22 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
     } catch (e) { el("delMsg").textContent = "خطا: " + e.message; }
   };
 
-  /* خودآزمایی: آیا این صفحه واقعاً روی یک Worker اجرا می‌شود؟ */
+  /* خودآزمایی: آیا این صفحه روی یک Worker اجرا می‌شود؟ */
   (async function () {
-    var alive = false;
     try {
       var r = await fetch("/api/ping", { cache: "no-store" });
       if (r.ok) {
         var j = await r.json();
         if (j && j.ok && j.mode === "worker") {
-          alive = true;
           log("حالت اجرا: Worker ✔ — کد پنل " + Math.round(j.size / 1024) + " کیلوبایت (" + j.panel + ")", "ok");
+          return;
         }
       }
-    } catch (e) { /* در ادامه مدیریت می‌شود */ }
-    if (!alive) {
-      el("netWarn").innerHTML =
-        '<div class="note warn" style="margin-bottom:16px">⚠ این صفحه به‌صورت <b>Worker</b> اجرا نمی‌شود '
-        + '(پاسخی از <code>/api/ping</code> دریافت نشد).'
-        + '<br>اگر این صفحه را به‌صورت فایل یا روی یک هاست استاتیک (مانند GitHub Pages) باز کرده‌اید، '
-        + 'مرورگر اجازهٔ تماس مستقیم با <code>api.cloudflare.com</code> را ندارد (محدودیت CORS) و '
-        + '<b>هر توکنی</b> خطای «Failed to fetch» می‌دهد.'
-        + '<br>راه‌حل: فایل <code>hex-deployer.worker.js</code> را به‌صورت یک Worker روی کلودفلر دیپلوی کنید '
-        + 'و این صفحه را از آدرس همان Worker باز کنید.</div>';
-      log("هشدار: بک‌اند در دسترس نیست — تماس مستقیم با API کلودفلر مسدود است.", "err");
-    }
+    } catch (e) { /* ادامه */ }
+    log("هشدار: بک‌اند در دسترس نیست — تماس مستقیم با API کلودفلر مسدود است.", "err");
   })();
 
-  log("آماده. ابتدا توکن را وارد کنید. (نسخه پنل: HEX v5.3.0)", "muted");
+  log("آماده. ابتدا توکن را وارد کنید.", "muted");
 })();
 </script>
 </body>
@@ -631,7 +622,18 @@ footer{text-align:center;color:#5B7A4C;font-size:12px;margin-top:30px;line-heigh
 `;
 const API = "https://api.cloudflare.com/client/v4";
 
-const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" };
+/* اجازهٔ فراخوانی از دامنه‌های دیگر (مثلاً صفحه‌ای که روی GitHub Pages است) */
+const CORS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Max-Age": "86400",
+};
+
+const JSON_HEADERS = Object.assign(
+  { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
+  CORS
+);
 const fail = (msg, status = 400) =>
   new Response(JSON.stringify({ ok: false, error: String(msg) }), { status, headers: JSON_HEADERS });
 const ok = (data) => new Response(JSON.stringify(Object.assign({ ok: true }, data)), { headers: JSON_HEADERS });
@@ -769,6 +771,11 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
 
+    /* پاسخ به preflight مرورگر برای درخواست‌های بین‌دامنه‌ای */
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: CORS });
+    }
+
     /* خودآزمایی: تشخیص اینکه صفحه واقعاً روی Worker اجرا می‌شود یا نه */
     if (request.method === "GET" && url.pathname === "/api/ping") {
       return ok({ mode: "worker", panel: "HEX v5.3.0", size: PANEL_CODE.length });
@@ -780,6 +787,7 @@ export default {
           "Content-Type": "text/html; charset=utf-8",
           "Cache-Control": "no-store",
           "X-Deployer": "hex-deployer",
+          "Access-Control-Allow-Origin": "*",
         },
       });
     }
