@@ -1,0 +1,9 @@
+# تنظیمات استقرار روی Cloudflare Workers (از طریق اتصال به گیت‌هاب)
+# نکته: مقدار name باید دقیقاً با نام پروژه‌ای که در داشبورد می‌سازید یکی باشد.
+
+name = "hex-deployer"
+main = "hex-deployer.worker.js"
+compatibility_date = "2026-10-28"
+
+# فایل از قبل کامل است و نیازی به باندل شدن ندارد (آپلود مستقیم)
+no_bundle = true
